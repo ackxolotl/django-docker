@@ -19,7 +19,7 @@ RUN apk update \
 # lint
 RUN pip install --upgrade pip
 RUN pip install flake8
-COPY app/ .
+COPY . .
 RUN flake8 --ignore=E501,F401 .
 
 # install dependencies
@@ -54,7 +54,7 @@ COPY --from=builder /usr/src/app/requirements.txt .
 RUN pip install --no-cache /wheels/*
 
 # copy project
-COPY app/ $APP_HOME
+COPY . $APP_HOME
 
 # copy entrypoint-prod.sh
 COPY docker/production/entrypoint.sh $APP_HOME
